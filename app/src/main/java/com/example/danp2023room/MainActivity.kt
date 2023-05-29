@@ -16,13 +16,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
+import com.example.danp2023room.composables.NavigationAppHost
 import com.example.danp2023room.entities.BookEntity
 import com.example.danp2023room.entities.StudentEntity
 import com.example.danp2023room.model.AppDatabase
@@ -46,7 +46,11 @@ class MainActivity : ComponentActivity() {
                     val context = LocalContext.current
                     val repository = Repository(AppDatabase.getInstance(context.applicationContext))
 
-                    RoomSample(repository)
+                    val navController = rememberNavController()
+                    // val viewModel: MainViewModel = hiltViewModel()
+                    NavigationAppHost(navController = navController, repository = repository)
+
+                    // RoomSample(repository)
 
                 }
             }
@@ -57,7 +61,7 @@ class MainActivity : ComponentActivity() {
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun RoomSample(repository: Repository) {
-    val TAG: String = "RoomDatabase"
+    val tag = "RoomDatabase"
     val scope = rememberCoroutineScope()
 
     Column(
@@ -73,7 +77,7 @@ fun RoomSample(repository: Repository) {
         val studentsOnClick: () -> Unit = {
             scope.launch {
                 repository.getAllStudents().forEach {
-                    Log.d(TAG, it.toString())
+                    Log.d(tag, it.toString())
                 }
             }
         }
@@ -81,7 +85,7 @@ fun RoomSample(repository: Repository) {
         val booksOnClick: () -> Unit = {
             scope.launch {
                 repository.getAllBooks().forEach {
-                    Log.d(TAG, it.toString())
+                    Log.d(tag, it.toString())
                 }
             }
         }
@@ -89,7 +93,7 @@ fun RoomSample(repository: Repository) {
         val studentWithBooksOnClick: () -> Unit = {
             scope.launch {
                 repository.getStudentWithBooks() .forEach {
-                    Log.d(TAG, it.toString())
+                    Log.d(tag, it.toString())
                 }
             }
         }
@@ -122,7 +126,7 @@ fun fillTables(rep: Repository, scope: CoroutineScope) {
     val students = ArrayList<StudentEntity>()
 
     for (i in 100..120) {
-        val studentEntity = StudentEntity(i, fullname = "Student " + i.toString())
+        val studentEntity = StudentEntity(i, fullname = "Student $i")
         students.add(studentEntity)
     }
 
@@ -132,13 +136,11 @@ fun fillTables(rep: Repository, scope: CoroutineScope) {
 
     for (i in 0..20) {
         val studentId = Random.nextInt(100, 120)
-        val bookEntity = BookEntity(name = "Book " + i.toString(), studentId)
+        val bookEntity = BookEntity(name = "Book $i", studentId)
         scope.launch {
             rep.insertBook(bookEntity)
         }
 
     }
-
-
 }
 
