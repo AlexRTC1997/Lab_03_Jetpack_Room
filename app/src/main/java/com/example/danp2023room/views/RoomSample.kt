@@ -61,6 +61,7 @@ fun RoomSample(repository: Repository, navController: NavHostController) {
             }
         }
 
+        // TODO: Error
         Spacer(modifier = Modifier.height(10.dp))
         // Button(onClick = fillDataOnClick) {
         Button(onClick = { navController.navigate(Destination.Register.route) }) {
@@ -68,20 +69,26 @@ fun RoomSample(repository: Repository, navController: NavHostController) {
         }
 
         Spacer(modifier = Modifier.height(10.dp))
-        // Button(onClick = studentsOnClick) {
-        Button(onClick = { navController.navigate(Destination.Students.route) }) {
+        Button(onClick = {
+            studentsOnClick()
+            navController.navigate(Destination.Students.route)
+        }) {
             Text(text = "Show students")
         }
 
         Spacer(modifier = Modifier.height(10.dp))
-        // Button(onClick = booksOnClick) {
-        Button(onClick = { navController.navigate(Destination.Courses.route) }) {
+        Button(onClick = {
+            booksOnClick()
+            navController.navigate(Destination.Courses.route)
+        }) {
             Text(text = "Show courses")
         }
 
         Spacer(modifier = Modifier.height(10.dp))
-        // Button(onClick = studentWithBooksOnClick) {
-        Button(onClick = { navController.navigate(Destination.Relationship.route) }) {
+        Button(onClick = {
+            studentWithBooksOnClick()
+            navController.navigate(Destination.Relationship.route)
+        }) {
             Text(text = "Student With Books")
         }
     }

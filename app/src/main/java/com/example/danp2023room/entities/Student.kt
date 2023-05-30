@@ -4,11 +4,11 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "address")
-data class AddressEntity (
+@Entity(tableName = "students")
+data class Student(
     @PrimaryKey(autoGenerate = true)
-    val addressId:Int,
+    val studentId: Int = 0,
 
-    @ColumnInfo(name = "address")
-    val address:String
+    @ColumnInfo(name="student_name")
+    val fullName: String
 )

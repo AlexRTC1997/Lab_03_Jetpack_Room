@@ -1,4 +1,4 @@
-package com.example.danp2023room.entities
+package com.example.danp2023room.entities.junk
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
