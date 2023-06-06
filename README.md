@@ -12,4 +12,7 @@ several students. Then carry out the following activities:
 to. Implement a user interface with a Button, which, when pressed, allows you to fill in the tables
 necessary to carry out activity 2
 b. Implement an interface to display a list of courses and those who enrolled in each course.
+<<<<<<< HEAD
 Example,
+=======
+>>>>>>> origin/main
